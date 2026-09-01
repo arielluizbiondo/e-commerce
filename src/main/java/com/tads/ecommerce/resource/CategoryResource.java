@@ -1,8 +1,11 @@
 package com.tads.ecommerce.resource;
 
 import com.tads.ecommerce.entity.Category;
+import com.tads.ecommerce.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,13 +17,13 @@ import java.util.List;
 
 public class CategoryResource
 {
+    @Autowired
+    private CategoryService service;
+
     @GetMapping
     public ResponseEntity <List<Category>> findAll()
     {
-        List<Category> list = new ArrayList<>();
-        list.add(new Category(1L, "Livros"));
-        list.add(new Category(2L, "Relógios"));
-
+        List<Category> list = service.findAll();
         return ResponseEntity.ok(list);
     }
 }
